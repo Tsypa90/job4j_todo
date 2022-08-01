@@ -1,5 +1,5 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
@@ -26,39 +26,33 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-item nav-link" th:href="@{/addItem}">Добавить задание</a>
-        <a class="nav-item nav-link" th:href="@{/logout}">
-          <span th:text="${account.name}"></span>
-          <span> | Выйти</span></a>
+        <a class="nav-item nav-link" th:href="@{/registration}">Регистрация</a>
       </div>
     </div>
   </nav>
-  <div class="row">
-    <table class="table">
-      <thead>
-      <tr>
-        <th scope="col"><a class="nav-item nav-link" th:href="@{/items}">Все задания</a></th>
-        <th scope="col"><a class="nav-item nav-link" th:href="@{/doneItems}">Выполненные задания</a></th>
-        <th scope="col"><a class="nav-item nav-link" th:href="@{/newItems}">Новые задания</a></th>
-      </tr>
-      </thead>
-      <thead>
-      <tr>
-        <th scope="col">Имя</th>
-        <th scope="col">Создана</th>
-        <th scope="col">Статус</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr th:each="item: ${items}">
-        <td><a th:text="${item.name}" th:href="@{|items/${item.id}|}"></a></td>
-        <td th:text="${item.created}"></td>
-        <td> <span th:if="${!item.done}">Не исполнено</span>
-          <span th:if="${item.done}">Исполнено</span>
-        </td>
-      </tr>
-      </tbody>
-    </table>
+  <div class="row pt-3">
+    <div class="card" style="width: 100%">
+      <div class="card-header">
+        Авторизация
+      </div>
+      <div class="card-body">
+        <div th:if="${fail}" class="alert alert-danger" role="alert">
+          Пользователь не существует!
+        </div>
+        <div th:if="${password}" class="alert alert-danger" role="alert">
+          Пароль введен неверно!
+        </div>
+        <form th:action="@{/login}" method="POST">
+          <div class="form-group">
+            <label for="login">Логин</label>
+            <input type="text" class="form-control" name="login" id="login">
+            <label for="password">Пароль</label>
+            <input type="text" class="form-control" name="password" id="password">
+          </div>
+          <button type="submit" class="btn btn-primary">Войти</button>
+        </form>
+      </div>
+    </div>
   </div>
 </div>
 </body>

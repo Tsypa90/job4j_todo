@@ -27,6 +27,9 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
         <a class="nav-item nav-link active" th:href="@{/addItem}">Добавить задание</a>
+        <a class="nav-item nav-link" th:href="@{/logout}">
+          <span th:text="${account.name}"></span>
+          <span> | Выйти</span></a>
       </div>
     </div>
   </nav>

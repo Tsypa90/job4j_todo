@@ -4,8 +4,11 @@ import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.job4j.model.Account;
 import ru.job4j.model.Item;
 import ru.job4j.service.ItemService;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 @ThreadSafe
@@ -17,36 +20,48 @@ public class ItemsController {
     }
 
     @GetMapping("/items")
-    public String items(Model model) {
+    public String items(Model model, HttpSession session) {
+        Account account = (Account) session.getAttribute("account");
+        model.addAttribute("account", account);
         model.addAttribute("items", service.findAll());
         return "items";
     }
 
     @GetMapping("/addItem")
-    public String addItem() {
+    public String addItem(Model model, HttpSession session) {
+        Account account = (Account) session.getAttribute("account");
+        model.addAttribute("account", account);
         return "/addItem";
     }
 
     @GetMapping("/newItems")
-    public String newItems(Model model) {
+    public String newItems(Model model, HttpSession session) {
+        Account account = (Account) session.getAttribute("account");
+        model.addAttribute("account", account);
         model.addAttribute("newItems", service.findAllNew());
         return "newItems";
     }
 
     @GetMapping("/doneItems")
-    public String doneItems(Model model) {
+    public String doneItems(Model model, HttpSession session) {
+        Account account = (Account) session.getAttribute("account");
+        model.addAttribute("account", account);
         model.addAttribute("doneItems", service.findAllDone());
         return "doneItems";
     }
 
     @GetMapping("/items/{item.id}")
-    public String getItem(Model model, @PathVariable("item.id") int id) {
+    public String getItem(Model model, HttpSession session, @PathVariable("item.id") int id) {
+        Account account = (Account) session.getAttribute("account");
+        model.addAttribute("account", account);
         model.addAttribute("item", service.findById(id));
         return "item";
     }
 
     @GetMapping("/update/{item.id}")
-    public String updateItem(Model model, @PathVariable("item.id") int id) {
+    public String updateItem(Model model, HttpSession session, @PathVariable("item.id") int id) {
+        Account account = (Account) session.getAttribute("account");
+        model.addAttribute("account", account);
         model.addAttribute("item", service.findById(id));
         return "update";
     }
