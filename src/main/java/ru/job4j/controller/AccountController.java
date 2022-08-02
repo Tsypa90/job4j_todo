@@ -42,7 +42,7 @@ public class AccountController {
     @PostMapping("/registration")
     public String registration(@ModelAttribute Account account) {
         Optional<Account> regAccount = service.add(account);
-        if (regAccount.isEmpty()) {
+        if (regAccount.isPresent()) {
             return "redirect:/registration?fail=true";
         }
         return "redirect:/login";
