@@ -20,26 +20,24 @@ public class AccountStore {
     public Optional<Account> add(Account account) {
         Session session = sf.openSession();
         session.beginTransaction();
-        Account rsl = (Account) session.createQuery("from Account s where s.login = :fLogin")
-                .setParameter("fLogin", account.getLogin()).uniqueResult();
-        if (rsl == null) {
+        Optional<Account> rsl = session.createQuery("from Account s where s.login = :fLogin")
+                .setParameter("fLogin", account.getLogin()).uniqueResultOptional();
+        if (rsl.isEmpty()) {
             session.save(account);
         }
         session.getTransaction().commit();
         session.close();
-        return account.getId() == 0 ? Optional.empty() : Optional.of(account);
+        return rsl;
     }
 
-    public Optional<Account> getByLogin(String login) {
+    public Optional<Account> getByLogin(String login, String password) {
         Session session = sf.openSession();
         session.beginTransaction();
-        Account rsl = (Account) session.createQuery("from Account s where s.login = :fLogin")
-                 .setParameter("fLogin", login).uniqueResult();
-        if (rsl == null) {
-            return Optional.empty();
-        }
+        Optional<Account> rsl = session.createQuery("from Account s where s.login = :fLogin and s.password = :fPassword")
+                 .setParameter("fLogin", login)
+                 .setParameter("fPassword", password).uniqueResultOptional();
         session.getTransaction().commit();
         session.close();
-        return Optional.of(rsl);
+        return rsl;
     }
 }

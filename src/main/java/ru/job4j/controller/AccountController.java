@@ -25,33 +25,22 @@ public class AccountController {
 
     @GetMapping("/registration")
     public String registration(Model model, HttpSession session,
-                               @RequestParam(name = "fail", required = false) Boolean fail,
-                               @RequestParam(name = "length", required = false) Boolean length) {
+                               @RequestParam(name = "fail", required = false) Boolean fail) {
         Account account = (Account) session.getAttribute("account");
         model.addAttribute("account", account);
         model.addAttribute("fail", fail != null);
-        model.addAttribute("length", length != null);
         return "registration";
     }
 
     @GetMapping("/login")
     public String login(Model model,
-                       @RequestParam(name = "fail", required = false) Boolean fail,
-                        @RequestParam(name = "password", required = false) Boolean password) {
+                       @RequestParam(name = "fail", required = false) Boolean fail) {
         model.addAttribute("fail", fail != null);
-        model.addAttribute("password", password != null);
         return "login";
     }
 
     @PostMapping("/registration")
     public String registration(@ModelAttribute Account account) {
-        if (account.getName().isBlank()) {
-            return "redirect:/registration?length=true";
-        } else if (account.getLogin().isBlank()) {
-            return "redirect:/registration?length=true";
-        } else if (account.getPassword().isBlank()) {
-            return "redirect:/registration?length=true";
-        }
         Optional<Account> regAccount = service.add(account);
         if (regAccount.isEmpty()) {
             return "redirect:/registration?fail=true";
@@ -61,12 +50,9 @@ public class AccountController {
 
     @PostMapping("/login")
     public String login(@ModelAttribute Account account, HttpServletRequest request) {
-        Optional<Account> accountDb = service.getByLogin(account.getLogin());
+        Optional<Account> accountDb = service.getByLogin(account.getLogin(), account.getPassword());
         if (accountDb.isEmpty()) {
             return "redirect:/login?fail=true";
-        }
-        if (!account.getPassword().equals(accountDb.get().getPassword())) {
-            return "redirect:/login?password=true";
         }
         HttpSession session = request.getSession();
         session.setAttribute("account", accountDb.get());

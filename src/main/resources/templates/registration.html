@@ -39,17 +39,14 @@
         <div th:if="${fail}" class="alert alert-danger" role="alert">
           Пользователь с таким именем уже существует!
         </div>
-        <div th:if="${length}" class="alert alert-danger" role="alert">
-          Поле не может быть пустым!
-        </div>
         <form th:action="@{/registration}" method="POST">
           <div class="form-group">
             <label for="name">Имя</label>
-            <input type="text" class="form-control" name="name" id="name">
+            <input type="text" class="form-control" name="name" id="name" required>
             <label for="login">Логин</label>
-            <input type="text" class="form-control" name="login" id="login">
+            <input type="text" class="form-control" name="login" id="login" required>
             <label for="password">Пароль</label>
-            <input type="text" class="form-control" name="password" id="password">
+            <input type="text" class="form-control" name="password" id="password" required>
           </div>
           <button type="submit" class="btn btn-primary">Зарегистрировать</button>
         </form>

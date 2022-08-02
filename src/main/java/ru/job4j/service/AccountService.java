@@ -20,7 +20,7 @@ public class AccountService {
         return store.add(account);
     }
 
-    public Optional<Account> getByLogin(String login) {
-        return store.getByLogin(login);
+    public Optional<Account> getByLogin(String login, String password) {
+        return store.getByLogin(login, password);
     }
 }

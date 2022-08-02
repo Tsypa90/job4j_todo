@@ -37,10 +37,7 @@
       </div>
       <div class="card-body">
         <div th:if="${fail}" class="alert alert-danger" role="alert">
-          Пользователь не существует!
-        </div>
-        <div th:if="${password}" class="alert alert-danger" role="alert">
-          Пароль введен неверно!
+          Не правильный логин или пароль!
         </div>
         <form th:action="@{/login}" method="POST">
           <div class="form-group">
