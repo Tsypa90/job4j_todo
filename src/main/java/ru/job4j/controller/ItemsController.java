@@ -9,6 +9,7 @@ import ru.job4j.model.Item;
 import ru.job4j.service.ItemService;
 
 import javax.servlet.http.HttpSession;
+import java.time.LocalDate;
 
 @Controller
 @ThreadSafe
@@ -67,7 +68,8 @@ public class ItemsController {
     }
 
     @PostMapping("/createItem")
-    public String createItem(@ModelAttribute Item item) {
+    public String createItem(@ModelAttribute Item item, HttpSession session) {
+        item.setAccount((Account) session.getAttribute("account"));
         service.add(item);
         return "redirect:/items";
     }

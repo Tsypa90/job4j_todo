@@ -2,9 +2,7 @@ package ru.job4j.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.Instant;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -17,15 +15,19 @@ public class Item implements Serializable {
     private String description;
     private LocalDate created;
     private boolean done;
+    @ManyToOne
+    @JoinColumn(name = "account_id")
+    private Account account;
 
-    public Item(String name, String description, LocalDate created, boolean done) {
+    public Item() {
+    }
+
+    public Item(String name, String description, LocalDate created, boolean done, Account account) {
         this.name = name;
         this.description = description;
         this.created = created;
         this.done = done;
-    }
-
-    public Item() {
+        this.account = account;
     }
 
     public String getName() {
@@ -66,6 +68,14 @@ public class Item implements Serializable {
 
     public void setDone(boolean done) {
         this.done = done;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
     @Override

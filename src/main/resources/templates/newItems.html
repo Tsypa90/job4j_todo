@@ -46,6 +46,7 @@
       <tr>
         <th scope="col">Имя</th>
         <th scope="col">Создана</th>
+        <th scope="col">Автор</th>
         <th scope="col">Статус</th>
       </tr>
       </thead>
@@ -53,6 +54,7 @@
       <tr th:each="item: ${newItems}">
         <td><a th:text="${item.name}" th:href="@{|items/${item.id}|}"></a></td>
         <td th:text="${item.created}"></td>
+        <td th:text="${item.account.name}"></td>
         <td>Не исполнено</td>
       </tr>
       </tbody>

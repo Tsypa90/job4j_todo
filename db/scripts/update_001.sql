@@ -12,3 +12,6 @@ name varchar(255),
 login varchar(255) unique,
 password varchar(255)
 );
+
+alter table item
+add account_id int references account(id);
