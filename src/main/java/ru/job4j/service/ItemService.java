@@ -5,10 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.job4j.model.Item;
 import ru.job4j.store.ItemStore;
 
-import java.time.Instant;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -51,8 +48,6 @@ public class ItemService {
     }
 
     public void isDoneItem(int id) {
-        Item item = store.findById(id);
-        item.setDone(true);
-        store.update(id, item);
+        store.updateDone(id);
     }
 }

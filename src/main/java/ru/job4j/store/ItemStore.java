@@ -39,6 +39,15 @@ public class ItemStore {
         return result == 1;
     }
 
+    public void updateDone(int id) {
+        Session session = sf.openSession();
+        session.beginTransaction();
+        int rsl = session.createQuery("update Item s set s.done = true where s.id = :fId")
+                .setParameter("fId", id).executeUpdate();
+        session.getTransaction().commit();
+        session.close();
+    }
+
     public boolean delete(int id) {
         Session session = sf.openSession();
         session.beginTransaction();

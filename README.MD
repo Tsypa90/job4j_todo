@@ -22,6 +22,4 @@
     - Объект SessionFactory создается один раз в классе Main с аннотацией @Bean. По аналогии с loadDabaseSource в проекте "Работа мечты".
     - Объект ItemStore принимает параметр SessionFactory через конструктор.
 
-![](/home/pavel/Изображения/Снимок экрана от 2022-08-01 22-53-45.png)
-
-![](/home/pavel/Изображения/Снимок экрана от 2022-08-01 22-53-49.png)
+https://github.com/Tsypa90/job4j_todo/commit/1fcb3cb8c650b55ac314a47c03072002c15f0ce2
