@@ -9,7 +9,6 @@ import ru.job4j.model.Item;
 import ru.job4j.service.ItemService;
 
 import javax.servlet.http.HttpSession;
-import java.time.LocalDate;
 
 @Controller
 @ThreadSafe
