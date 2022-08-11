@@ -8,6 +8,7 @@ import ru.job4j.store.CategoryStore;
 import ru.job4j.store.ItemStore;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -22,7 +23,7 @@ public class ItemService {
     }
 
     public Item add(Item item) {
-        item.setCreated(LocalDate.now());
+        item.setCreated(new Date(System.currentTimeMillis()));
         item.setDone(false);
         return store.add(item);
     }

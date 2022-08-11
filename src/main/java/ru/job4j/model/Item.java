@@ -2,7 +2,7 @@ package ru.job4j.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -15,7 +15,8 @@ public class Item implements Serializable {
     private int id;
     private String name;
     private String description;
-    private LocalDate created;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date created;
     private boolean done;
     @ManyToOne
     @JoinColumn(name = "account_id")
@@ -26,7 +27,7 @@ public class Item implements Serializable {
     public Item() {
     }
 
-    public Item(String name, String description, LocalDate created, boolean done, Account account) {
+    public Item(String name, String description, Date created, boolean done, Account account) {
         this.name = name;
         this.description = description;
         this.created = created;
@@ -58,11 +59,11 @@ public class Item implements Serializable {
         this.description = description;
     }
 
-    public LocalDate getCreated() {
+    public Date getCreated() {
         return created;
     }
 
-    public void setCreated(LocalDate created) {
+    public void setCreated(Date created) {
         this.created = created;
     }
 
