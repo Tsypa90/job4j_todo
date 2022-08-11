@@ -48,6 +48,7 @@
         <th scope="col">Создана</th>
         <th scope="col">Автор</th>
         <th scope="col">Статус</th>
+        <th scope="col">Категория</th>
       </tr>
       </thead>
       <tbody>
@@ -58,6 +59,7 @@
         <td> <span th:if="${!item.done}">Не исполнено</span>
           <span th:if="${item.done}">Исполнено</span>
         </td>
+        <td th:each="category : ${item.categories}" th:text="${category.name}"></td>
       </tr>
       </tbody>
     </table>

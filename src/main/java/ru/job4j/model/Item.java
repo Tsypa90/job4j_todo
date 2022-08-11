@@ -3,7 +3,9 @@ package ru.job4j.model;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "item")
@@ -18,6 +20,8 @@ public class Item implements Serializable {
     @ManyToOne
     @JoinColumn(name = "account_id")
     private Account account;
+    @ManyToMany(cascade = CascadeType.ALL)
+    private Set<Category> categories = new HashSet<>();
 
     public Item() {
     }
@@ -76,6 +80,14 @@ public class Item implements Serializable {
 
     public void setAccount(Account account) {
         this.account = account;
+    }
+
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
     }
 
     @Override

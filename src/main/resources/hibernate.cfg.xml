@@ -17,5 +17,6 @@
 
         <mapping class="ru.job4j.model.Item" />
         <mapping class="ru.job4j.model.Account" />
+        <mapping class="ru.job4j.model.Category" />
     </session-factory>
 </hibernate-configuration>

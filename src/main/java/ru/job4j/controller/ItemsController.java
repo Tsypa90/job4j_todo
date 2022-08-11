@@ -9,6 +9,7 @@ import ru.job4j.model.Item;
 import ru.job4j.service.ItemService;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @ThreadSafe
@@ -31,6 +32,7 @@ public class ItemsController {
     public String addItem(Model model, HttpSession session) {
         Account account = (Account) session.getAttribute("account");
         model.addAttribute("account", account);
+        model.addAttribute("categories", service.findAllCategories());
         return "/addItem";
     }
 
@@ -67,8 +69,12 @@ public class ItemsController {
     }
 
     @PostMapping("/createItem")
-    public String createItem(@ModelAttribute Item item, HttpSession session) {
+    public String createItem(@RequestParam("category_id") List<Integer> categoryId, @ModelAttribute Item item, HttpSession session) {
         item.setAccount((Account) session.getAttribute("account"));
+        for (Integer id : categoryId) {
+            var category = service.findCategoryById(id);
+            item.getCategories().add(category);
+        }
         service.add(item);
         return "redirect:/items";
     }

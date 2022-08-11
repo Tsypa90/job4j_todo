@@ -43,7 +43,7 @@ public class ItemStore implements Store {
     }
 
     public List<Item> findAll() {
-        return tx(session -> session.createQuery("from Item order by created ASC ").list(), sf);
+        return tx(session -> session.createQuery("select distinct c from Item c join fetch c.categories order by c.id ASC").list(), sf);
     }
 
     public List<Item> findAllNew() {
