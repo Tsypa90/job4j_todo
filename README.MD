@@ -20,8 +20,8 @@
 
 3. Приложение должно иметь три слоя: Контроллеры, Сервисы, Персистенции.
     - Объект SessionFactory создается один раз в классе Main с аннотацией @Bean. По аналогии с loadDabaseSource в проекте "Работа мечты".
-    - Объект ItemStore принимает параметр SessionFactory через конструктор.
-    
-![Снимок экрана от 2022-08-01 22-53-45](https://user-images.githubusercontent.com/94564221/182372588-0d4f4072-0e5a-47f8-b1e8-bfa86c4fe2f6.png)
+    - Объект ItemStore принимает параметр SessionFactory через конструктор.\
+   
+![Снимок экрана от 2022-08-12 17-45-33](https://user-images.githubusercontent.com/94564221/184380370-f2792f30-3495-4a0f-9c0a-7c056ef36165.png)
 
 ![Снимок экрана от 2022-08-01 22-53-49](https://user-images.githubusercontent.com/94564221/182372678-b371c8b8-d57c-4bec-a7ef-e0995d37b3cc.png)
